@@ -25,6 +25,16 @@ def get_results():
         return '', http.client.NO_CONTENT
 
 
+@app.route('/neutral/', methods=['POST'])
+def get_results():
+    keyword = request.form['keyword']  # getting input from user
+    neutral_news = fetch_news_based_on_sentiment(keyword, "neutral")
+    if len(neutral_news) > 0:
+        return jsonify(neutral_news)
+    else:
+        return '', http.client.NO_CONTENT
+
+
 @app.route('/negative/', methods=['POST'])
 def get_negative_results():
     keyword = request.form['keyword']  # getting input from user
